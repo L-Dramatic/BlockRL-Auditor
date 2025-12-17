@@ -1,0 +1,28 @@
+# SquirRL-Auditor Dependencies
+
+# 基础依赖
+numpy>=1.19.0
+scipy>=1.5.0
+matplotlib>=3.3.0
+
+# Gym 环境
+gym>=0.21.0
+
+# 强化学习框架
+stable-baselines3>=2.0.0
+torch>=1.9.0
+
+# 可视化
+plotly>=5.0.0
+seaborn>=0.11.0
+
+# MDP工具箱（原项目依赖）
+pymdptoolbox
+
+# 配置管理
+pyyaml>=5.4.0
+
+# 开发工具（可选）
+pytest>=6.2.0
+black>=21.0
+
