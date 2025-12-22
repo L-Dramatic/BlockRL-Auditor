@@ -146,7 +146,7 @@ def render():
     col1, col2, col3, col4 = st.columns(4)
     
     metrics = [
-        (honest_reward, "诚实挖矿", "基准收益", "#64748b"),
+        (honest_reward, "诚实挖矿", "基准收益", "#94a3b8"),
         (attack_reward, "无防御攻击", f"+{attack_gain:.1f}%", "#ef4444"),
         (defended_reward, "UTB防御后", f"+{defended_gain:.1f}%", "#3b82f6"),
         (defense_effectiveness, "防御有效性", "%", "#22c55e")
@@ -159,7 +159,7 @@ def render():
                 <div class="metric-card" style="border-color: {color}40;">
                     <div class="metric-value" style="color: {color};">{value:.1f}%</div>
                     <div class="metric-label">{label}</div>
-                    <div style="font-size: 0.7rem; color: #64748b;">降低超额收益</div>
+                    <div style="font-size: 0.7rem; color: #cbd5e1;">降低超额收益</div>
                 </div>
                 """, unsafe_allow_html=True)
             else:
@@ -200,7 +200,7 @@ def render():
             line_dash="dash", 
             line_color="rgba(255,255,255,0.3)",
             annotation_text=f"公平份额 (α={alpha})",
-            annotation_font_color="#94a3b8"
+            annotation_font_color="#e2e8f0"
         )
         
         fig_bar.update_layout(
@@ -215,9 +215,9 @@ def render():
             plot_bgcolor='rgba(30,30,63,0.4)',
             yaxis=dict(
                 gridcolor='rgba(139,92,246,0.1)',
-                tickfont=dict(color='#94a3b8')
+                tickfont=dict(color='#ffffff')
             ),
-            xaxis=dict(tickfont=dict(color='#e2e8f0')),
+            xaxis=dict(tickfont=dict(color='#ffffff')),
             font=dict(family='Inter')
         )
         
@@ -267,7 +267,7 @@ def render():
                     visible=True, 
                     range=[0, 1],
                     gridcolor='rgba(139,92,246,0.2)',
-                    tickfont=dict(color='#64748b')
+                    tickfont=dict(color='#ffffff')
                 ),
                 angularaxis=dict(
                     tickfont=dict(color='#e2e8f0', size=12)
@@ -281,7 +281,7 @@ def render():
                 font=dict(family='Playfair Display', size=18, color='#e2e8f0')
             ),
             paper_bgcolor='rgba(0,0,0,0)',
-            legend=dict(font=dict(color='#e2e8f0')),
+            legend=dict(font=dict(color='#ffffff')),
             font=dict(family='Inter')
         )
         
@@ -312,7 +312,7 @@ def render():
             x=alphas, y=honest_rewards,
             mode='lines',
             name='诚实挖矿',
-            line=dict(color='#64748b', width=2, dash='dash')
+            line=dict(color='#94a3b8', width=2, dash='dash')
         ))
         
         fig_line.add_trace(go.Scatter(
@@ -343,13 +343,13 @@ def render():
                 font=dict(family='Playfair Display', size=18, color='#e2e8f0')
             ),
             xaxis=dict(
-                title=dict(text='攻击者算力 (α)', font=dict(color='#e2e8f0')),
-                tickfont=dict(color='#94a3b8'),
+                title=dict(text='攻击者算力 (α)', font=dict(color='#ffffff')),
+                tickfont=dict(color='#ffffff'),
                 gridcolor='rgba(139,92,246,0.1)'
             ),
             yaxis=dict(
-                title=dict(text='相对奖励', font=dict(color='#e2e8f0')),
-                tickfont=dict(color='#94a3b8'),
+                title=dict(text='相对奖励', font=dict(color='#ffffff')),
+                tickfont=dict(color='#ffffff'),
                 gridcolor='rgba(139,92,246,0.1)'
             ),
             height=400,
@@ -361,7 +361,7 @@ def render():
                 y=1.02,
                 xanchor="center",
                 x=0.5,
-                font=dict(color='#e2e8f0')
+                font=dict(color='#ffffff')
             ),
             font=dict(family='Inter')
         )
@@ -411,7 +411,7 @@ def render():
             marker_color=['#3b82f6' if ki != f"{utb_ratio*100:.0f}%" else '#a855f7' for ki in k_values],
             text=[f'{r:.4f}' for r in k_rewards],
             textposition='outside',
-            textfont=dict(color='#e2e8f0')
+            textfont=dict(color='#ffffff')
         ),
         row=1, col=1
     )
@@ -438,12 +438,12 @@ def render():
         plot_bgcolor='rgba(30,30,63,0.4)',
         font=dict(family='Inter', color='#e2e8f0')
     )
-    fig_k.update_xaxes(tickfont=dict(color='#e2e8f0'), gridcolor='rgba(139,92,246,0.1)')
+    fig_k.update_xaxes(tickfont=dict(color='#ffffff'), gridcolor='rgba(139,92,246,0.1)')
     fig_k.update_yaxes(title_text="相对奖励", row=1, col=1, 
-                       tickfont=dict(color='#94a3b8'), gridcolor='rgba(139,92,246,0.1)')
+                       tickfont=dict(color='#ffffff'), gridcolor='rgba(139,92,246,0.1)')
     fig_k.update_yaxes(title_text="有效性 (%)", row=1, col=2,
-                       tickfont=dict(color='#94a3b8'), gridcolor='rgba(139,92,246,0.1)')
-    fig_k.update_annotations(font=dict(color='#e2e8f0'))
+                       tickfont=dict(color='#ffffff'), gridcolor='rgba(139,92,246,0.1)')
+    fig_k.update_annotations(font=dict(color='#ffffff'))
     
     st.plotly_chart(fig_k, use_container_width=True)
     
@@ -460,7 +460,7 @@ def render():
             <div style="color: #22c55e; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">
                 ✅ 防御有效
             </div>
-            <div style="color: #94a3b8; line-height: 1.8;">
+            <div style="color: #e2e8f0; line-height: 1.8;">
                 • UTB 将攻击收益从 <b style="color:#ef4444">{attack_reward:.4f}</b> 降至 <b style="color:#3b82f6">{defended_reward:.4f}</b><br>
                 • 降低了 <b style="color:#22c55e">{defense_effectiveness:.1f}%</b> 的超额收益<br>
                 • UTB比率 {utb_ratio*100:.0f}% {'（注意：实际测试发现UTB=100%可能适得其反）' if utb_ratio >= 0.75 else '是合理的选择'}
@@ -476,7 +476,7 @@ def render():
             <div style="color: #3b82f6; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">
                 💡 实验发现
             </div>
-            <div style="color: #94a3b8; line-height: 1.8;">
+            <div style="color: #e2e8f0; line-height: 1.8;">
                 • 当前场景: α={alpha}, γ={gamma}<br>
                 • 推荐UTB比率: <b style="color:#a855f7">{optimal_utb*100:.0f}%</b>（实际测试最有效）<br>
                 • 注意：UTB=100%反而给攻击者更多收益

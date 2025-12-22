@@ -287,7 +287,7 @@ def render():
             # 进度指示
             progress_placeholder.markdown(f"""
             <div style="text-align: center; padding: 1rem;">
-                <span style="font-family: 'JetBrains Mono'; color: #94a3b8;">
+                <span style="font-family: 'JetBrains Mono'; color: #e2e8f0;">
                     步骤 {i+1} / {len(steps)}
                 </span>
                 <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.5rem;">
@@ -311,7 +311,7 @@ def render():
         
         progress_placeholder.markdown(f"""
         <div style="text-align: center; padding: 1rem;">
-            <span style="font-family: 'JetBrains Mono'; color: #94a3b8;">
+            <span style="font-family: 'JetBrains Mono'; color: #e2e8f0;">
                 步骤 {st.session_state.anim_step + 1} / {len(steps)}
             </span>
         </div>
@@ -336,7 +336,7 @@ def render():
             <div class="feature-title">Adopt (采纳)</div>
             <div class="feature-desc">
                 放弃私有链，采用公共链<br>
-                <span style="color: #64748b;">当私有链落后太多时的止损策略</span>
+                <span style="color: #cbd5e1;">当私有链落后太多时的止损策略</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -348,7 +348,7 @@ def render():
             <div class="feature-title">Override (覆盖)</div>
             <div class="feature-desc">
                 发布私有链，覆盖公共链<br>
-                <span style="color: #64748b;">当私有链更长时的获利时机</span>
+                <span style="color: #cbd5e1;">当私有链更长时的获利时机</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -360,7 +360,7 @@ def render():
             <div class="feature-title">Wait (等待)</div>
             <div class="feature-desc">
                 继续隐藏私有链<br>
-                <span style="color: #64748b;">积累优势，等待最佳发布时机</span>
+                <span style="color: #cbd5e1;">积累优势，等待最佳发布时机</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -373,7 +373,7 @@ def render():
     <div style="background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); 
                 border-radius: 12px; padding: 0.75rem; margin-bottom: 1rem;">
         <span style="color: #a855f7;">💡 提示：</span>
-        <span style="color: #94a3b8;">以下数据为理论分析值，实际结果可能因协议、算力分布等因素有所差异</span>
+        <span style="color: #e2e8f0;">以下数据为理论分析值，实际结果可能因协议、算力分布等因素有所差异</span>
     </div>
     """, unsafe_allow_html=True)
     
@@ -392,7 +392,7 @@ def render():
             <div class="metric-card">
                 <div class="metric-value">{value}</div>
                 <div class="metric-label">{label}</div>
-                <div style="font-size: 0.7rem; color: #64748b; margin-top: 0.3rem;">{desc}</div>
+                <div style="font-size: 0.7rem; color: #cbd5e1; margin-top: 0.3rem;">{desc}</div>
             </div>
             """, unsafe_allow_html=True)
 

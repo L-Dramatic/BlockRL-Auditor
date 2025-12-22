@@ -127,6 +127,9 @@ def train_selfish_mining(
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     if protocol == "utb" and env_kwargs and 'utb_ratio' in env_kwargs:
         model_name = f"{protocol}_alpha_{alpha:.2f}_ratio_{env_kwargs['utb_ratio']:.2f}_{timestamp}"
+    elif gamma != 0.5:
+        # 非默认gamma值时，将gamma加入模型名称
+        model_name = f"{protocol}_alpha_{alpha:.2f}_gamma_{gamma:.2f}_{timestamp}"
     else:
         model_name = f"{protocol}_alpha_{alpha:.2f}_{timestamp}"
     

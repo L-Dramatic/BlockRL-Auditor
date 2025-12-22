@@ -124,7 +124,7 @@ def render():
                 <span style="font-size: 1.5rem;">{icon}</span>
                 <div>
                     <div style="color: #e2e8f0; font-weight: 600;">{i+1}. {title}</div>
-                    <div style="color: #64748b; font-size: 0.85rem;">{desc}</div>
+                    <div style="color: #cbd5e1; font-size: 0.85rem;">{desc}</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -152,7 +152,7 @@ def render():
             <div style="margin-bottom: 1rem;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                     <span style="color: #a855f7;">{icon} {title}</span>
-                    <span style="color: #64748b;">{section_idx + 1}/{total_sections}</span>
+                    <span style="color: #cbd5e1;">{section_idx + 1}/{total_sections}</span>
                 </div>
                 <div style="height: 6px; background: rgba(139,92,246,0.2); border-radius: 3px; overflow: hidden;">
                     <div style="height: 100%; width: {progress*100}%; background: linear-gradient(90deg, #8b5cf6, #a855f7); border-radius: 3px; transition: width 0.3s;"></div>
@@ -170,10 +170,10 @@ def render():
                         <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">
                             SquirRL-Auditor
                         </h1>
-                        <p style="color: #94a3b8; font-size: 1.2rem; margin-bottom: 2rem;">
+                        <p style="color: #e2e8f0; font-size: 1.2rem; margin-bottom: 2rem;">
                             基于深度强化学习的区块链激励机制安全审计
                         </p>
-                        <div style="color: #64748b; font-size: 0.9rem; font-style: italic;">
+                        <div style="color: #cbd5e1; font-size: 0.9rem; font-style: italic;">
                             Automating Attack Analysis on Blockchain Incentive Mechanisms<br>
                             with Deep Reinforcement Learning
                         </div>
@@ -200,10 +200,10 @@ def render():
                     <div class="section-title">❓ 研究问题</div>
                     <div class="glass-card">
                         <h3 style="color: #e2e8f0; margin-bottom: 1rem;">区块链激励机制存在漏洞</h3>
-                        <p style="color: #94a3b8; line-height: 1.8;">
+                        <p style="color: #e2e8f0; line-height: 1.8;">
                             比特币等区块链系统依赖<b style="color: #a855f7;">激励机制</b>确保矿工诚实行为：
                         </p>
-                        <ul style="color: #94a3b8; line-height: 2;">
+                        <ul style="color: #e2e8f0; line-height: 2;">
                             <li><b>假设</b>：诚实挖矿是矿工的最优策略</li>
                             <li><b>现实</b>：存在<span style="color: #ef4444;">自私挖矿</span>等攻击策略可获取超额收益</li>
                         </ul>
@@ -215,7 +215,7 @@ def render():
                         st.markdown("""
                         <div class="glass-card" style="border-color: rgba(239,68,68,0.3);">
                             <div style="color: #ef4444; font-weight: 600; margin-bottom: 0.5rem;">🎯 自私挖矿攻击</div>
-                            <div style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+                            <div style="color: #e2e8f0; font-size: 0.9rem; line-height: 1.6;">
                                 • 攻击者隐藏挖到的区块<br>
                                 • 策略性地选择发布时机<br>
                                 • 获得超过算力比例的收益
@@ -226,7 +226,7 @@ def render():
                         st.markdown("""
                         <div class="glass-card" style="border-color: rgba(34,197,94,0.3);">
                             <div style="color: #22c55e; font-weight: 600; margin-bottom: 0.5rem;">🎯 研究目标</div>
-                            <div style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+                            <div style="color: #e2e8f0; font-size: 0.9rem; line-height: 1.6;">
                                 • 自动发现最优攻击策略<br>
                                 • 量化攻击收益<br>
                                 • 评估防御机制效果
@@ -245,13 +245,13 @@ def render():
                             textfont=dict(color='#e2e8f0', size=16)
                         ))
                         fig.add_hline(y=0.35, line_dash="dash", line_color="rgba(255,255,255,0.3)",
-                                     annotation_text="公平份额", annotation_font_color="#94a3b8")
+                                     annotation_text="公平份额", annotation_font_color="#e2e8f0")
                         fig.update_layout(
-                            title=dict(text='α=35% 时的收益对比', font=dict(color='#e2e8f0')),
+                            title=dict(text='α=35% 时的收益对比', font=dict(color='#ffffff')),
                             height=300, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(30,30,63,0.4)',
-                            yaxis=dict(title=dict(text='区块奖励占比', font=dict(color='#e2e8f0')),
-                                      tickfont=dict(color='#94a3b8'), gridcolor='rgba(139,92,246,0.1)'),
-                            xaxis=dict(tickfont=dict(color='#e2e8f0')),
+                            yaxis=dict(title=dict(text='区块奖励占比', font=dict(color='#ffffff')),
+                                      tickfont=dict(color='#ffffff'), gridcolor='rgba(139,92,246,0.1)'),
+                            xaxis=dict(tickfont=dict(color='#ffffff')),
                             font=dict(family='Inter')
                         )
                         st.plotly_chart(fig, use_container_width=True)
@@ -265,13 +265,13 @@ def render():
                         st.markdown("""
                         <div class="glass-card">
                             <h4 style="color: #a855f7; margin-bottom: 1rem;">📦 状态空间 (State)</h4>
-                            <div style="color: #94a3b8; font-family: 'JetBrains Mono'; font-size: 0.9rem; line-height: 2;">
+                            <div style="color: #e2e8f0; font-family: 'JetBrains Mono'; font-size: 0.9rem; line-height: 2;">
                                 • <code>a</code>: 攻击者私有链长度<br>
                                 • <code>h</code>: 公共链领先长度<br>
                                 • <code>fork</code>: 当前分叉状态
                             </div>
                             <h4 style="color: #a855f7; margin: 1.5rem 0 1rem;">🎮 动作空间 (Action)</h4>
-                            <div style="color: #94a3b8; font-family: 'JetBrains Mono'; font-size: 0.9rem; line-height: 2;">
+                            <div style="color: #e2e8f0; font-family: 'JetBrains Mono'; font-size: 0.9rem; line-height: 2;">
                                 • <code>Adopt</code>: 放弃私有链<br>
                                 • <code>Override</code>: 发布私有链<br>
                                 • <code>Wait</code>: 继续隐藏<br>
@@ -288,11 +288,11 @@ def render():
                                 reward = attacker_blocks / total_blocks
                                 </code>
                             </div>
-                            <div style="color: #94a3b8; font-size: 0.9rem;">
+                            <div style="color: #e2e8f0; font-size: 0.9rem;">
                                 目标：最大化攻击者区块占比
                             </div>
                             <h4 style="color: #a855f7; margin: 1.5rem 0 1rem;">🌐 协议支持</h4>
-                            <div style="color: #94a3b8; font-size: 0.9rem; line-height: 2;">
+                            <div style="color: #e2e8f0; font-size: 0.9rem; line-height: 2;">
                                 ✅ Bitcoin &nbsp;&nbsp; ✅ GHOST &nbsp;&nbsp; ✅ Ethereum
                             </div>
                         </div>
@@ -306,7 +306,7 @@ def render():
                     <div style="background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); 
                                 border-radius: 12px; padding: 0.75rem; margin-bottom: 1rem;">
                         <span style="color: #a855f7;">💡 提示：</span>
-                        <span style="color: #94a3b8;">以下训练曲线为演示用，展示典型的训练过程。实际训练通过命令行完成，结果保存在 results/ 目录</span>
+                        <span style="color: #e2e8f0;">以下训练曲线为演示用，展示典型的训练过程。实际训练通过命令行完成，结果保存在 results/ 目录</span>
                     </div>
                     """, unsafe_allow_html=True)
                     
@@ -320,7 +320,7 @@ def render():
                         
                         fig.add_trace(go.Scatter(x=steps, y=rewards, mode='lines',
                                                 line=dict(color='#8b5cf6', width=2)), row=1, col=1)
-                        fig.add_hline(y=0.35, line_dash="dash", line_color="#64748b",
+                        fig.add_hline(y=0.35, line_dash="dash", line_color="#94a3b8",
                                      annotation_text="诚实基准", row=1, col=1)
                         fig.add_hline(y=0.41, line_dash="dash", line_color="#22c55e",
                                      annotation_text="理论最优", row=1, col=1)
@@ -334,9 +334,9 @@ def render():
                             font=dict(family='Inter', color='#e2e8f0')
                         )
                         fig.update_xaxes(title_text='训练步数', gridcolor='rgba(139,92,246,0.1)',
-                                        tickfont=dict(color='#94a3b8'))
-                        fig.update_yaxes(gridcolor='rgba(139,92,246,0.1)', tickfont=dict(color='#94a3b8'))
-                        fig.update_annotations(font=dict(color='#e2e8f0'))
+                                        tickfont=dict(color='#ffffff'))
+                        fig.update_yaxes(gridcolor='rgba(139,92,246,0.1)', tickfont=dict(color='#ffffff'))
+                        fig.update_annotations(font=dict(color='#ffffff'))
                         
                         st.plotly_chart(fig, use_container_width=True)
                     
@@ -366,7 +366,7 @@ def render():
                     fig.add_trace(go.Scatter(x=alphas, y=theory, mode='lines',
                                             name='OSM (理论最优)', line=dict(color='#3b82f6', width=3)))
                     fig.add_trace(go.Scatter(x=alphas, y=alphas, mode='lines',
-                                            name='诚实挖矿', line=dict(color='#64748b', width=2, dash='dash')))
+                                            name='诚实挖矿', line=dict(color='#94a3b8', width=2, dash='dash')))
                     
                     # 尝试加载真实数据
                     real_bitcoin_data = load_real_bitcoin_data()
@@ -387,12 +387,12 @@ def render():
                     
                     fig.update_layout(
                         title=dict(text='Bitcoin 自私挖矿攻击收益 (γ=0.5)', font=dict(color='#e2e8f0', size=16)),
-                        xaxis=dict(title=dict(text='攻击者算力占比 (α)', font=dict(color='#e2e8f0')),
-                                  tickfont=dict(color='#94a3b8'), gridcolor='rgba(139,92,246,0.1)'),
-                        yaxis=dict(title=dict(text='相对奖励', font=dict(color='#e2e8f0')),
-                                  tickfont=dict(color='#94a3b8'), gridcolor='rgba(139,92,246,0.1)'),
+                        xaxis=dict(title=dict(text='攻击者算力占比 (α)', font=dict(color='#ffffff')),
+                                  tickfont=dict(color='#ffffff'), gridcolor='rgba(139,92,246,0.1)'),
+                        yaxis=dict(title=dict(text='相对奖励', font=dict(color='#ffffff')),
+                                  tickfont=dict(color='#ffffff'), gridcolor='rgba(139,92,246,0.1)'),
                         height=400, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(30,30,63,0.4)',
-                        legend=dict(orientation="h", yanchor="bottom", y=1.02, font=dict(color='#e2e8f0')),
+                        legend=dict(orientation="h", yanchor="bottom", y=1.02, font=dict(color='#ffffff')),
                         font=dict(family='Inter')
                     )
                     st.plotly_chart(fig, use_container_width=True)
@@ -400,7 +400,7 @@ def render():
                     st.markdown("""
                     <div class="glass-card" style="border-color: rgba(34,197,94,0.3);">
                         <div style="color: #22c55e; font-weight: 600; margin-bottom: 0.5rem;">🎯 关键发现</div>
-                        <div style="color: #94a3b8; line-height: 1.8;">
+                        <div style="color: #e2e8f0; line-height: 1.8;">
                             • SquirRL 学习到的策略接近理论最优 (OSM)<br>
                             • α=35% 时，攻击者获得 <b style="color: #ef4444;">39.4%</b> 的收益 (理论值 41%)<br>
                             • 相比诚实挖矿，收益增加约 <b style="color: #22c55e;">+12.7%</b>
@@ -438,13 +438,13 @@ def render():
                         textfont=dict(color='#e2e8f0', size=14)
                     ))
                     fig.add_hline(y=0.35, line_dash="dash", line_color="rgba(255,255,255,0.3)",
-                                 annotation_text="诚实挖矿 (35%)", annotation_font_color="#94a3b8")
+                                 annotation_text="诚实挖矿 (35%)", annotation_font_color="#e2e8f0")
                     fig.update_layout(
-                        title=dict(text=f'不同协议对自私挖矿的抵抗能力 (α=35%) {data_source_note}', font=dict(color='#e2e8f0')),
+                        title=dict(text=f'不同协议对自私挖矿的抵抗能力 (α=35%) {data_source_note}', font=dict(color='#ffffff')),
                         height=350, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(30,30,63,0.4)',
-                        yaxis=dict(title=dict(text='相对奖励', font=dict(color='#e2e8f0')),
-                                  tickfont=dict(color='#94a3b8'), gridcolor='rgba(139,92,246,0.1)'),
-                        xaxis=dict(tickfont=dict(color='#e2e8f0')),
+                        yaxis=dict(title=dict(text='相对奖励', font=dict(color='#ffffff')),
+                                  tickfont=dict(color='#ffffff'), gridcolor='rgba(139,92,246,0.1)'),
+                        xaxis=dict(tickfont=dict(color='#ffffff')),
                         font=dict(family='Inter')
                     )
                     st.plotly_chart(fig, use_container_width=True)
@@ -469,7 +469,7 @@ def render():
                             st.markdown(f"""
                             <div class="glass-card" style="border-color: {color}40; text-align: center;">
                                 <div style="color: {color}; font-size: 1.2rem; font-weight: 600;">{name}</div>
-                                <div style="color: #94a3b8; margin: 0.5rem 0;">攻击收益: {gain}</div>
+                                <div style="color: #e2e8f0; margin: 0.5rem 0;">攻击收益: {gain}</div>
                                 <div style="font-size: 1.2rem;">{stars}</div>
                             </div>
                             """, unsafe_allow_html=True)
@@ -496,7 +496,7 @@ def render():
                             <div class="glass-card" style="height: 100%;">
                                 <div style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">{icon}</div>
                                 <div style="text-align: center; color: #a855f7; font-weight: 600; margin-bottom: 1rem;">{title}</div>
-                                <div style="color: #94a3b8; font-size: 0.85rem; line-height: 1.8;">
+                                <div style="color: #e2e8f0; font-size: 0.85rem; line-height: 1.8;">
                                     {'<br>'.join(['• ' + item for item in items])}
                                 </div>
                             </div>
@@ -507,7 +507,7 @@ def render():
                     st.markdown("""
                     <div style="text-align: center; padding: 3rem 1rem; margin-top: 2rem;">
                         <h2 style="color: #a855f7; margin-bottom: 1rem;">谢谢观看！</h2>
-                        <p style="color: #64748b; font-size: 1.2rem;">欢迎提问 🙋</p>
+                        <p style="color: #cbd5e1; font-size: 1.2rem;">欢迎提问 🙋</p>
                     </div>
                     """, unsafe_allow_html=True)
             
@@ -524,7 +524,7 @@ def render():
     
     st.markdown("""
     <div class="glass-card" style="text-align: center;">
-        <div style="color: #64748b; margin-bottom: 1rem;">
+        <div style="color: #cbd5e1; margin-bottom: 1rem;">
             💡 提示：各页面的图表均支持右键保存为 PNG 图片
         </div>
         <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">

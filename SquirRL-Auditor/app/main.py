@@ -54,7 +54,19 @@ st.markdown("""
     }
     
     [data-testid="stSidebar"] .stMarkdown {
-        color: #e2e8f0;
+        color: #ffffff;
+    }
+    
+    /* 侧边栏所有文字都设为白色 */
+    [data-testid="stSidebar"] * {
+        color: #ffffff !important;
+    }
+    
+    [data-testid="stSidebar"] p, 
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] div,
+    [data-testid="stSidebar"] label {
+        color: #ffffff !important;
     }
     
     /* 主标题 */
@@ -80,7 +92,7 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
         font-size: 1.3rem;
         font-weight: 300;
-        color: #94a3b8;
+        color: #e2e8f0;
         text-align: center;
         margin-top: 0.5rem;
         letter-spacing: 3px;
@@ -143,7 +155,7 @@ st.markdown("""
     .feature-desc {
         font-family: 'Inter', sans-serif;
         font-size: 0.9rem;
-        color: #94a3b8;
+        color: #e2e8f0;
         line-height: 1.6;
     }
     
@@ -174,7 +186,7 @@ st.markdown("""
     .metric-label {
         font-family: 'Inter', sans-serif;
         font-size: 0.85rem;
-        color: #94a3b8;
+        color: #e2e8f0;
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-top: 0.5rem;
@@ -291,6 +303,32 @@ st.markdown("""
         padding: 0.75rem 1rem;
         margin: 0.25rem 0;
         transition: all 0.3s ease;
+        color: #ffffff !important;
+    }
+    
+    .stRadio > div > label > div {
+        color: #ffffff !important;
+    }
+    
+    .stRadio > div > label > div > p {
+        color: #ffffff !important;
+    }
+    
+    .stRadio > div > label span {
+        color: #ffffff !important;
+    }
+    
+    /* 确保所有radio文本都是白色 */
+    [data-testid="stSidebar"] .stRadio label {
+        color: #ffffff !important;
+    }
+    
+    [data-testid="stSidebar"] .stRadio label div {
+        color: #ffffff !important;
+    }
+    
+    [data-testid="stSidebar"] .stRadio label p {
+        color: #ffffff !important;
     }
     
     .stRadio > div > label:hover {
@@ -335,7 +373,7 @@ st.markdown("""
     .stTabs [data-baseweb="tab"] {
         background: transparent;
         border-radius: 8px;
-        color: #94a3b8;
+        color: #e2e8f0;
         padding: 0.75rem 1.5rem;
     }
     
@@ -356,7 +394,7 @@ st.markdown("""
     .page-subtitle {
         font-family: 'Inter', sans-serif;
         font-size: 1rem;
-        color: #64748b;
+        color: #cbd5e1;
         margin-bottom: 2rem;
     }
     
@@ -392,7 +430,7 @@ with st.sidebar:
                     -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
             SquirRL
         </div>
-        <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #64748b; 
+        <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #cbd5e1; 
                     letter-spacing: 2px; text-transform: uppercase;">
             Auditor
         </div>
@@ -403,7 +441,7 @@ with st.sidebar:
     
     # 导航
     st.markdown("""
-    <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #64748b; 
+    <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #e2e8f0; 
                 letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;">
         导航菜单
     </div>
@@ -416,6 +454,7 @@ with st.sidebar:
             "🎬 攻击模拟动画", 
             "📈 多协议对比",
             "🛡️ 防御效果评估",
+            "📊 Gamma参数分析",
             "🎯 一键演示"
         ],
         label_visibility="collapsed"
@@ -425,7 +464,7 @@ with st.sidebar:
     
     # 快速状态
     st.markdown("""
-    <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #64748b; 
+    <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #e2e8f0; 
                 letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;">
         系统状态
     </div>
@@ -437,15 +476,15 @@ with st.sidebar:
         <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); 
                     border-radius: 8px; padding: 0.75rem; text-align: center;">
             <div style="color: #22c55e; font-size: 1.2rem;">●</div>
-            <div style="color: #94a3b8; font-size: 0.7rem;">运行中</div>
+            <div style="color: #e2e8f0; font-size: 0.7rem;">运行中</div>
         </div>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
         <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); 
                     border-radius: 8px; padding: 0.75rem; text-align: center;">
-            <div style="color: #a855f7; font-family: 'JetBrains Mono'; font-size: 1rem;">v1.0</div>
-            <div style="color: #94a3b8; font-size: 0.7rem;">版本</div>
+            <div style="color: #c4b5fd; font-family: 'JetBrains Mono'; font-size: 1rem;">v1.0</div>
+            <div style="color: #e2e8f0; font-size: 0.7rem;">版本</div>
         </div>
         """, unsafe_allow_html=True)
     
@@ -454,10 +493,10 @@ with st.sidebar:
     # 底部信息
     st.markdown("""
     <div style="text-align: center; padding: 1rem 0;">
-        <div style="font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #475569;">
+        <div style="font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #cbd5e1;">
             Powered by
         </div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #94a3b8;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #e2e8f0;">
             Stable-Baselines3 + Streamlit
         </div>
     </div>
@@ -492,7 +531,7 @@ if page == "🏠 首页":
             <div class="metric-card">
                 <div class="metric-value">{value}</div>
                 <div class="metric-label">{label}</div>
-                <div style="font-size: 0.7rem; color: #64748b; margin-top: 0.5rem;">{desc}</div>
+                <div style="font-size: 0.7rem; color: #cbd5e1; margin-top: 0.5rem;">{desc}</div>
             </div>
             """, unsafe_allow_html=True)
     
@@ -507,6 +546,7 @@ if page == "🏠 首页":
         ("🎬", "攻击模拟动画", "通过精美动画直观展示自私挖矿攻击的完整流程，理解区块隐藏与发布策略"),
         ("📈", "多协议对比", "交互式 3D 曲面图对比 Bitcoin、GHOST、Ethereum 的安全性差异"),
         ("🛡️", "防御效果评估", "评估 UTB 等防御机制的效果，用雷达图和柱状图展示防御前后对比"),
+        ("📊", "Gamma参数分析", "研究网络跟随者比例(γ)对攻击效果的影响，验证理论预测"),
         ("🎯", "一键演示", "自动播放完整研究流程，专为答辩和展示设计")
     ]
     
@@ -564,13 +604,13 @@ if page == "🏠 首页":
     
     st.markdown("""
     <div class="code-block">
-<span style="color: #64748b;"># 启动 Web 应用</span>
+<span style="color: #cbd5e1;"># 启动 Web 应用</span>
 <span style="color: #f472b6;">streamlit</span> run app/main.py
 
-<span style="color: #64748b;"># 命令行训练</span>
+<span style="color: #cbd5e1;"># 命令行训练</span>
 <span style="color: #f472b6;">python</span> -m src.cli train --protocol bitcoin --alpha 0.35
 
-<span style="color: #64748b;"># Docker 部署</span>
+<span style="color: #cbd5e1;"># Docker 部署</span>
 <span style="color: #f472b6;">docker-compose</span> up --build
     </div>
     """, unsafe_allow_html=True)
@@ -586,6 +626,10 @@ elif page == "📈 多协议对比":
 elif page == "🛡️ 防御效果评估":
     from app.pages import defense_evaluation
     defense_evaluation.render()
+
+elif page == "📊 Gamma参数分析":
+    from app.pages import gamma_analysis
+    gamma_analysis.render()
 
 elif page == "🎯 一键演示":
     from app.pages import auto_demo

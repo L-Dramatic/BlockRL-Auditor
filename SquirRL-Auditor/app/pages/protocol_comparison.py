@@ -100,19 +100,19 @@ def create_3d_surface(protocol_filter="all"):
         scene=dict(
             xaxis=dict(
                 title=dict(text='攻击者算力 (α)', font=dict(color='#e2e8f0', family='Inter')),
-                tickfont=dict(color='#94a3b8'),
+                tickfont=dict(color='#ffffff'),
                 gridcolor='rgba(139,92,246,0.1)',
                 backgroundcolor='rgba(15,15,35,0.8)'
             ),
             yaxis=dict(
                 title=dict(text='跟随者比例 (γ)', font=dict(color='#e2e8f0', family='Inter')),
-                tickfont=dict(color='#94a3b8'),
+                tickfont=dict(color='#ffffff'),
                 gridcolor='rgba(139,92,246,0.1)',
                 backgroundcolor='rgba(15,15,35,0.8)'
             ),
             zaxis=dict(
                 title=dict(text='相对奖励', font=dict(color='#e2e8f0', family='Inter')),
-                tickfont=dict(color='#94a3b8'),
+                tickfont=dict(color='#ffffff'),
                 gridcolor='rgba(139,92,246,0.1)',
                 backgroundcolor='rgba(15,15,35,0.8)'
             ),
@@ -143,7 +143,7 @@ def create_2d_comparison(gamma=0.5):
         x=alphas, y=alphas,
         mode='lines',
         name='Honest Mining',
-        line=dict(color='#64748b', width=2, dash='dash'),
+        line=dict(color='#94a3b8', width=2, dash='dash'),
         fill='tozeroy',
         fillcolor='rgba(100,116,139,0.1)'
     ))
@@ -181,14 +181,14 @@ def create_2d_comparison(gamma=0.5):
             font=dict(family='Playfair Display', size=20, color='#e2e8f0')
         ),
         xaxis=dict(
-            title=dict(text='攻击者算力 (α)', font=dict(color='#e2e8f0')),
-            tickfont=dict(color='#94a3b8'),
+            title=dict(text='攻击者算力 (α)', font=dict(color='#ffffff')),
+            tickfont=dict(color='#ffffff'),
             gridcolor='rgba(139,92,246,0.1)',
             linecolor='rgba(139,92,246,0.3)'
         ),
         yaxis=dict(
-            title=dict(text='相对奖励', font=dict(color='#e2e8f0')),
-            tickfont=dict(color='#94a3b8'),
+            title=dict(text='相对奖励', font=dict(color='#ffffff')),
+            tickfont=dict(color='#ffffff'),
             gridcolor='rgba(139,92,246,0.1)',
             linecolor='rgba(139,92,246,0.3)'
         ),
@@ -201,7 +201,7 @@ def create_2d_comparison(gamma=0.5):
             y=1.02,
             xanchor="center",
             x=0.5,
-            font=dict(color='#e2e8f0')
+            font=dict(color='#ffffff')
         ),
         font=dict(family='Inter', color='#e2e8f0')
     )
@@ -227,7 +227,7 @@ def render():
         <div style="background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); 
                     border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
             <span style="color: #a855f7;">💡 提示：</span>
-            <span style="color: #94a3b8;">拖动旋转 | 滚轮缩放 | 悬停查看数值</span>
+            <span style="color: #e2e8f0;">拖动旋转 | 滚轮缩放 | 悬停查看数值</span>
         </div>
         """, unsafe_allow_html=True)
         
@@ -235,7 +235,7 @@ def render():
         
         with col2:
             st.markdown("""
-            <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 0.5rem;">
+            <div style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 0.5rem;">
                 显示协议
             </div>
             """, unsafe_allow_html=True)
@@ -250,7 +250,7 @@ def render():
             st.markdown('<div class="fancy-divider"></div>', unsafe_allow_html=True)
             
             st.markdown("""
-            <div style="font-size: 0.75rem; color: #64748b;">
+            <div style="font-size: 0.75rem; color: #cbd5e1;">
                 <b>图例</b><br><br>
                 🟣 Bitcoin - 最脆弱<br>
                 🔵 GHOST - 中等<br>
@@ -399,7 +399,7 @@ def render():
                 Bitcoin
             </div>
             <div style="color: #ef4444; font-size: 0.8rem; margin-bottom: 1rem;">⚠️ 最脆弱</div>
-            <div style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+            <div style="color: #e2e8f0; font-size: 0.9rem; line-height: 1.6;">
                 • 最长链规则<br>
                 • 无天然防御机制<br>
                 • α > 25% 攻击有利<br>
@@ -416,7 +416,7 @@ def render():
                 GHOST
             </div>
             <div style="color: #fbbf24; font-size: 0.8rem; margin-bottom: 1rem;">⚡ 中等防御</div>
-            <div style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+            <div style="color: #e2e8f0; font-size: 0.9rem; line-height: 1.6;">
                 • 考虑叔块权重<br>
                 • 部分抵抗自私挖矿<br>
                 • 攻击阈值提高 ~5%<br>
@@ -433,7 +433,7 @@ def render():
                 Ethereum
             </div>
             <div style="color: #22c55e; font-size: 0.8rem; margin-bottom: 1rem;">✅ 相对安全</div>
-            <div style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+            <div style="color: #e2e8f0; font-size: 0.9rem; line-height: 1.6;">
                 • 修改版 GHOST<br>
                 • 叔块奖励机制<br>
                 • 攻击门槛最高<br>
