@@ -9,6 +9,10 @@ from gymnasium import spaces
 import numpy as np
 from .base_env import SM_env, SM_env_with_stale
 
+# 延迟导入GHOST环境（避免循环导入）
+GHOSTSelfishMiningEnv = None
+EthereumSelfishMiningEnv = None
+
 
 class BitcoinSelfishMiningEnv(gym.Env):
     """
@@ -130,11 +134,19 @@ class BitcoinSelfishMiningEnv(gym.Env):
         truncated = False  # 我们不使用 truncation
         
         # 创建新的 info 字典
+        # 获取真正的相对奖励（攻击者区块占比）
+        reward_fraction = getattr(self.env, 'reward_fraction', 0)
+        attacker_blocks = getattr(self.env, '_attack_block', 0)
+        honest_blocks = getattr(self.env, '_honest_block', 0)
+        
         info = {
             'steps': self.steps,
             'episode_reward': self.episode_reward,
             'alpha': self.alpha,
-            'state_info': self.get_state_info(next_state)
+            'state_info': self.get_state_info(next_state),
+            'reward_fraction': reward_fraction,  # 这是论文中的相对奖励！
+            'attacker_blocks': attacker_blocks,
+            'honest_blocks': honest_blocks
         }
         
         return next_state, reward, terminated, truncated, info
@@ -184,12 +196,40 @@ def make_env(protocol="bitcoin", **kwargs):
     返回：
         env (gym.Env): Gym 环境实例
     """
+    global GHOSTSelfishMiningEnv, EthereumSelfishMiningEnv
+    
     if protocol.lower() == "bitcoin":
         return BitcoinSelfishMiningEnv(**kwargs)
     elif protocol.lower() == "ghost":
+        # 延迟导入
+        if GHOSTSelfishMiningEnv is None:
+            from .ghost_env import GHOSTSelfishMiningEnv as _GHOSTEnv
+            GHOSTSelfishMiningEnv = _GHOSTEnv
         return GHOSTSelfishMiningEnv(**kwargs)
+    elif protocol.lower() == "ethereum" or protocol.lower() == "eth":
+        # 延迟导入
+        if EthereumSelfishMiningEnv is None:
+            from .ghost_env import EthereumSelfishMiningEnv as _EthEnv
+            EthereumSelfishMiningEnv = _EthEnv
+        # Ethereum环境使用不同的参数名
+        eth_kwargs = dict(kwargs)
+        if 'alpha' in eth_kwargs:
+            eth_kwargs['attacker_fraction'] = eth_kwargs.pop('alpha')
+        if 'gamma' in eth_kwargs:
+            eth_kwargs['follower_fraction'] = eth_kwargs.pop('gamma')
+        return EthereumSelfishMiningEnv(**eth_kwargs)
+    elif protocol.lower() == "utb":
+        # UTB防御环境
+        from .utb_defense import UTBDefenseEnv
+        # UTBDefenseEnv 使用不同的参数名
+        utb_kwargs = dict(kwargs)
+        if 'alpha' in utb_kwargs:
+            utb_kwargs['attacker_fraction'] = utb_kwargs.pop('alpha')
+        if 'gamma' in utb_kwargs:
+            utb_kwargs['follower_fraction'] = utb_kwargs.pop('gamma')
+        return UTBDefenseEnv(**utb_kwargs)
     else:
-        raise ValueError(f"Unknown protocol: {protocol}")
+        raise ValueError(f"Unknown protocol: {protocol}. Supported: bitcoin, ghost, ethereum, utb")
 
 
 if __name__ == "__main__":

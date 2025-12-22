@@ -1,0 +1,41 @@
+# GHOST协议专用配置
+# GHOST (Greedy Heaviest Observed SubTree) 协议
+
+environment:
+  protocol: ghost
+  alpha: 0.35
+  gamma: 0.5
+  max_hidden_block: 20
+  stale_rate: 0.06  # Ethereum实际孤块率约6%
+  know_alpha: true
+  random:
+    enabled: false
+    dev: 0.0
+    interval: [0.0, 0.5]
+    process: brown
+
+training:
+  algorithm: DQN
+  total_timesteps: 150000  # GHOST可能需要更多训练
+  learning_rate: 0.0001
+  buffer_size: 50000
+  learning_starts: 2000
+  batch_size: 64
+  gamma_discount: 0.99
+  target_update_interval: 1000
+  exploration:
+    initial_eps: 1.0
+    final_eps: 0.02
+    fraction: 0.15
+
+evaluation:
+  n_episodes: 100
+  max_steps: 10000
+  deterministic: true
+
+output:
+  model_path: ./models/ghost
+  log_path: ./logs/ghost
+  results_path: ./results/ghost
+  tensorboard: false
+

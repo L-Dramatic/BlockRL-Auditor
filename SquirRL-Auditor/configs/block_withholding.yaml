@@ -1,0 +1,61 @@
+# Block Withholding (扣块攻击) 配置
+# 模拟矿池间的博弈攻击
+
+environment:
+  # Block Withholding 使用特殊的博弈环境
+  type: block_withholding
+  
+  # 矿池 1 参数
+  pool1:
+    alpha: 0.3  # 算力占比
+    name: "Pool A"
+  
+  # 矿池 2 参数
+  pool2:
+    alpha: 0.3  # 算力占比
+    name: "Pool B"
+  
+  # 其余算力属于散户矿工
+  # remaining = 1 - pool1.alpha - pool2.alpha = 0.4
+
+  # 博弈参数
+  max_infiltration: 0.5  # 最大渗透率
+  n_rounds: 1000  # 博弈轮数
+
+training:
+  algorithm: DQN
+  total_timesteps: 200000
+  learning_rate: 0.0001
+  buffer_size: 100000
+  learning_starts: 5000
+  batch_size: 64
+  gamma_discount: 0.99
+  target_update_interval: 2000
+  exploration:
+    initial_eps: 1.0
+    final_eps: 0.01
+    fraction: 0.2
+
+evaluation:
+  n_episodes: 100
+  max_steps: 10000
+  deterministic: true
+
+output:
+  model_path: ./models/bw
+  log_path: ./logs/bw
+  results_path: ./results/bw
+  tensorboard: false
+
+# Block Withholding 实验配置
+experiments:
+  # 测试不同矿池算力组合
+  pool_configs:
+    - [0.2, 0.2]
+    - [0.3, 0.3]
+    - [0.4, 0.4]
+    - [0.3, 0.4]
+    - [0.2, 0.4]
+  n_repeats: 3
+  seed_start: 42
+

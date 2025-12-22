@@ -1,0 +1,59 @@
+# UTB (Uniform Tie-Breaking) 防御机制配置
+# UTB 是一种针对自私挖矿的防御策略
+
+environment:
+  protocol: bitcoin
+  alpha: 0.35
+  gamma: 0.5
+  max_hidden_block: 20
+  stale_rate: 0.0
+  know_alpha: true
+  random:
+    enabled: false
+    dev: 0.0
+    interval: [0.0, 0.5]
+    process: iid
+
+# UTB 防御特定参数
+defense:
+  enabled: true
+  type: utb
+  # UTB 惩罚比率 (0-1)，越高防御越强
+  utb_ratio: 0.5
+  # 每个区块最多包含的叔块数
+  max_uncles: 2
+
+training:
+  algorithm: DQN
+  total_timesteps: 100000
+  learning_rate: 0.0001
+  buffer_size: 50000
+  learning_starts: 1000
+  batch_size: 32
+  gamma_discount: 0.99
+  target_update_interval: 1000
+  exploration:
+    initial_eps: 1.0
+    final_eps: 0.05
+    fraction: 0.1
+
+evaluation:
+  n_episodes: 100
+  max_steps: 10000
+  deterministic: true
+
+output:
+  model_path: ./models/utb
+  log_path: ./logs/utb
+  results_path: ./results/utb
+  tensorboard: false
+
+# UTB 参数扫描实验
+experiments:
+  # 测试不同 UTB 比率
+  utb_ratios: [0.0, 0.25, 0.5, 0.75, 1.0]
+  # 测试的 alpha 值
+  alphas: [0.25, 0.30, 0.35, 0.40, 0.45]
+  n_repeats: 3
+  seed_start: 42
+

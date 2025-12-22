@@ -1,0 +1,115 @@
+# SquirRL-Auditor 默认配置文件
+# 
+# 使用方法：
+#   python -m src.cli train --config configs/default.yaml
+#   或在代码中：config = load_config("configs/default.yaml")
+
+# ============================================================
+# 环境配置
+# ============================================================
+environment:
+  # 协议类型: bitcoin, ghost, ethereum
+  protocol: bitcoin
+  
+  # 攻击者算力占比 (0 < alpha < 0.5)
+  alpha: 0.35
+  
+  # 跟随者比例 (0 <= gamma <= 1)
+  # gamma = 1 表示所有诚实矿工都跟随攻击者的链
+  gamma: 0.5
+  
+  # 最大隐藏区块数
+  max_hidden_block: 20
+  
+  # 孤块率（仅对GHOST/Ethereum有效）
+  stale_rate: 0.06
+  
+  # 是否将alpha作为状态的一部分
+  know_alpha: true
+  
+  # alpha随机波动配置
+  random:
+    enabled: false
+    dev: 0.0
+    interval: [0.0, 0.5]
+    process: iid  # iid 或 brown
+
+# ============================================================
+# 训练配置
+# ============================================================
+training:
+  # 算法: DQN, PPO, A2C
+  algorithm: DQN
+  
+  # 总训练步数
+  total_timesteps: 100000
+  
+  # 学习率
+  learning_rate: 0.0001
+  
+  # 经验回放缓冲区大小 (仅DQN)
+  buffer_size: 50000
+  
+  # 开始学习前的步数
+  learning_starts: 1000
+  
+  # 批次大小
+  batch_size: 32
+  
+  # 折扣因子
+  gamma_discount: 0.99
+  
+  # 目标网络更新间隔 (仅DQN)
+  target_update_interval: 1000
+  
+  # 探索配置
+  exploration:
+    initial_eps: 1.0
+    final_eps: 0.05
+    fraction: 0.1
+
+# ============================================================
+# 评估配置
+# ============================================================
+evaluation:
+  # 评估的episode数量
+  n_episodes: 100
+  
+  # 每个episode的最大步数
+  max_steps: 10000
+  
+  # 是否使用确定性策略
+  deterministic: true
+
+# ============================================================
+# 输出配置
+# ============================================================
+output:
+  # 模型保存路径
+  model_path: ./models
+  
+  # 日志保存路径
+  log_path: ./logs
+  
+  # 结果保存路径
+  results_path: ./results
+  
+  # 是否启用TensorBoard
+  tensorboard: false
+
+# ============================================================
+# 实验配置（用于批量实验）
+# ============================================================
+experiments:
+  # 要测试的alpha值列表
+  alphas: [0.25, 0.30, 0.35, 0.40, 0.45]
+  
+  # 要测试的协议列表
+  protocols: [bitcoin, ghost]
+  
+  # 每个配置的重复次数
+  n_repeats: 3
+  
+  # 随机种子起始值
+  seed_start: 42
+

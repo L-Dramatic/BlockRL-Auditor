@@ -569,7 +569,10 @@ class SM_env:
 
     @property
     def reward_fraction(self):
-        return (self._attack_block) / (self._honest_block + self._attack_block)
+        total = self._honest_block + self._attack_block
+        if total == 0:
+            return 0.0
+        return (self._attack_block) / total
 
     def name_of_action(self, idx, action):
         state = self._index_to_name(idx)
@@ -1312,7 +1315,10 @@ class eth_env:
 
     @property
     def reward_fraction(self):
-        return self._attacker_gain / (self._attacker_gain + self._honest_gain)
+        total = self._attacker_gain + self._honest_gain
+        if total == 0:
+            return 0.0
+        return self._attacker_gain / total
 
     def map_to_legal_action(self, state, action):
         s, r, d, a = self.step(state, action, move = False)
@@ -2034,7 +2040,10 @@ class SM_env_with_stale:
 
     @property
     def reward_fraction(self):
-        return (self._attack_block) / (self._honest_block + self._attack_block)
+        total = self._honest_block + self._attack_block
+        if total == 0:
+            return 0.0
+        return (self._attack_block) / total
 
     '''
     def name_of_action(self, idx, action):
@@ -2856,7 +2865,10 @@ class SM_env_with_cost:
     def reward_fraction(self):
         #jprint("attack block = ", self._attack_block)
         #print("honest block = ", self._honest_block)
-        return (self._attack_block) / (self._honest_block + self._attack_block)
+        total = self._honest_block + self._attack_block
+        if total == 0:
+            return 0.0
+        return (self._attack_block) / total
 
     @property
     def reward_per_time(self):

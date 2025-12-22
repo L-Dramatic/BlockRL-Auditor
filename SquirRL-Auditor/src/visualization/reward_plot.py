@@ -104,7 +104,7 @@ def plot_figure3(
                    label='SquirRL (DQN)', zorder=5)
         # 添加误差线（如果有）
         if results is not None and 'std_reward' in results[0]:
-            stds = [r.get('std_reward', 0) / np.sqrt(r.get('n_episodes', 100)) 
+            stds = [float(r.get('std_reward', 0)) / np.sqrt(float(r.get('n_episodes', 100))) 
                     for r in results]
             ax.errorbar(alphas, rewards, yerr=stds, fmt='none', 
                        color='red', capsize=3, alpha=0.7)
@@ -264,4 +264,3 @@ if __name__ == "__main__":
     else:
         # 默认生成演示图
         demo_figure3()
-

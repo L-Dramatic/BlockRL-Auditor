@@ -1,0 +1,68 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+.eggs
+*.egg
+.pytest_cache
+.mypy_cache
+
+# Virtual environments
+venv
+env
+.venv
+.env
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+.cursor
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Build
+build
+dist
+*.manifest
+*.spec
+
+# Logs (keep structure but not content)
+logs/*.log
+logs/*.csv
+logs/*.npz
+
+# Large model files (optional - uncomment if you want smaller images)
+# models/
+# checkpoints/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation source (keep compiled docs)
+docs/*.md~
+
+# Test artifacts
+.coverage
+htmlcov
+.tox
+
+# Local configuration
+*.local.yaml
+.env.local

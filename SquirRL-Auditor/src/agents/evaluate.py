@@ -23,7 +23,8 @@ def evaluate_model(
     n_episodes=100,
     max_steps_per_episode=10000,
     deterministic=True,
-    verbose=1
+    verbose=1,
+    **env_kwargs
 ):
     """
     评估训练好的模型
@@ -48,11 +49,12 @@ def evaluate_model(
     model = DQN.load(model_path)
     
     # 创建环境
-    env = make_env(protocol=protocol, alpha=alpha, gamma=gamma)
+    env = make_env(protocol=protocol, alpha=alpha, gamma=gamma, **env_kwargs)
     
     # 评估指标
     episode_rewards = []
     episode_lengths = []
+    episode_reward_fractions = []  # 新增：真正的相对奖励（攻击者区块占比）
     action_counts = defaultdict(int)
     
     if verbose:
@@ -60,6 +62,8 @@ def evaluate_model(
         print(f"  协议: {protocol}")
         print(f"  α: {alpha}")
         print(f"  γ: {gamma}")
+        if 'utb_ratio' in env_kwargs:
+            print(f"  UTB 比率: {env_kwargs['utb_ratio']}")
     
     for episode in range(n_episodes):
         state, info = env.reset()
@@ -81,12 +85,25 @@ def evaluate_model(
             if terminated or truncated:
                 break
         
+        # 获取真正的相对奖励（攻击者区块占比）
+        reward_fraction = info.get('reward_fraction', 0)
+        if reward_fraction == 0:
+            # 备用方案：从底层环境获取
+            try:
+                reward_fraction = env.env.reward_fraction
+            except:
+                attacker_blocks = info.get('attacker_blocks', 0)
+                honest_blocks = info.get('honest_blocks', 0)
+                total_blocks = attacker_blocks + honest_blocks
+                reward_fraction = attacker_blocks / total_blocks if total_blocks > 0 else alpha
+        
         episode_rewards.append(episode_reward)
         episode_lengths.append(episode_length)
+        episode_reward_fractions.append(reward_fraction)
         
         if verbose and (episode + 1) % 10 == 0:
             print(f"  Episode {episode + 1}/{n_episodes}: "
-                  f"reward={episode_reward:.3f}, length={episode_length}")
+                  f"reward_fraction={reward_fraction:.4f}, length={episode_length}")
     
     # 计算统计数据
     results = {
@@ -102,29 +119,28 @@ def evaluate_model(
         'std_length': np.std(episode_lengths),
         'action_distribution': dict(action_counts),
         'episode_rewards': episode_rewards,
-        'episode_lengths': episode_lengths
+        'episode_lengths': episode_lengths,
+        # 新增：真正的相对奖励统计（这是论文中的定义！）
+        'mean_reward_fraction': np.mean(episode_reward_fractions),
+        'std_reward_fraction': np.std(episode_reward_fractions),
+        'episode_reward_fractions': episode_reward_fractions
     }
     
-    # 计算相对奖励（相比于诚实挖矿）
     # 诚实挖矿的期望奖励比例 = alpha
-    # 自私挖矿如果成功，应该 > alpha
-    honest_reward = alpha  # 诚实策略的期望奖励比例
+    honest_reward = alpha
     
-    # 计算平均每步奖励
-    total_steps = sum(episode_lengths)
-    total_reward = sum(episode_rewards)
-    avg_reward_per_step = total_reward / total_steps if total_steps > 0 else 0
-    
-    results['avg_reward_per_step'] = avg_reward_per_step
+    # 相对收益 = 攻击者实际获得的区块比例（这才是论文中的定义！）
     results['honest_baseline'] = honest_reward
-    results['relative_gain'] = avg_reward_per_step  # 相对于诚实策略的收益
+    results['relative_gain'] = results['mean_reward_fraction']  # 修正：使用 reward_fraction
+    results['excess_reward'] = results['mean_reward_fraction'] - alpha  # 超额收益
     
     if verbose:
         print(f"\n评估结果:")
-        print(f"  平均奖励: {results['mean_reward']:.4f} ± {results['std_reward']:.4f}")
-        print(f"  平均长度: {results['mean_length']:.1f} ± {results['std_length']:.1f}")
+        print(f"  相对奖励 (reward_fraction): {results['mean_reward_fraction']:.4f} ± {results['std_reward_fraction']:.4f}")
+        print(f"  诚实挖矿基准 (alpha): {alpha:.4f}")
+        print(f"  超额收益: {results['excess_reward']:.4f}")
+        print(f"  平均episode长度: {results['mean_length']:.1f} ± {results['std_length']:.1f}")
         print(f"  动作分布: {results['action_distribution']}")
-        print(f"  每步平均奖励: {avg_reward_per_step:.6f}")
     
     return results
 

@@ -15,6 +15,7 @@ import numpy as np
 from stable_baselines3 import DQN
 from stable_baselines3.common.callbacks import EvalCallback, CheckpointCallback
 from stable_baselines3.common.monitor import Monitor
+from gymnasium.wrappers import TimeLimit
 
 from src.environment.gym_wrapper import make_env
 
@@ -37,7 +38,8 @@ def train_selfish_mining(
     save_path="./models",
     log_path="./logs",
     seed=None,
-    verbose=1
+    verbose=1,
+    env_kwargs=None
 ):
     """
     训练自私挖矿策略
@@ -82,15 +84,25 @@ def train_selfish_mining(
     print(f"  协议: {protocol}")
     print(f"  攻击者算力 (α): {alpha}")
     print(f"  跟随者比例 (γ): {gamma}")
+    if env_kwargs and 'utb_ratio' in env_kwargs:
+        print(f"  UTB 比率: {env_kwargs['utb_ratio']}")
     print(f"  训练步数: {total_timesteps}")
     print(f"  学习率: {learning_rate}")
     print(f"{'='*60}\n")
     
-    env = make_env(protocol=protocol, alpha=alpha, gamma=gamma)
+    # 准备环境参数
+    if env_kwargs is None:
+        env_kwargs = {}
+    env_params = {'alpha': alpha, 'gamma': gamma, **env_kwargs}
+    
+    # 创建训练环境（添加步数限制防止无限循环）
+    env = make_env(protocol=protocol, **env_params)
+    env = TimeLimit(env, max_episode_steps=10000)  # 限制每个episode最多10000步
     env = Monitor(env, log_path if log_path else None)
     
-    # 创建评估环境
-    eval_env = make_env(protocol=protocol, alpha=alpha, gamma=gamma)
+    # 创建评估环境（同样添加步数限制）
+    eval_env = make_env(protocol=protocol, **env_params)
+    eval_env = TimeLimit(eval_env, max_episode_steps=1000)  # 评估时限制更短，加快评估速度
     eval_env = Monitor(eval_env)
     
     # 创建模型
@@ -113,18 +125,22 @@ def train_selfish_mining(
     
     # 创建回调函数
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    model_name = f"{protocol}_alpha_{alpha:.2f}_{timestamp}"
+    if protocol == "utb" and env_kwargs and 'utb_ratio' in env_kwargs:
+        model_name = f"{protocol}_alpha_{alpha:.2f}_ratio_{env_kwargs['utb_ratio']:.2f}_{timestamp}"
+    else:
+        model_name = f"{protocol}_alpha_{alpha:.2f}_{timestamp}"
     
     # 创建回调函数列表
     callbacks = []
     
     if log_path:
-        # 评估回调
+        # 评估回调（减少评估频率和episode数，加快训练）
         eval_callback = EvalCallback(
             eval_env,
             best_model_save_path=os.path.join(save_path, f"best_{model_name}"),
             log_path=log_path,
-            eval_freq=max(total_timesteps // 10, 1000),
+            eval_freq=max(total_timesteps // 5, 5000),  # 减少评估频率
+            n_eval_episodes=5,  # 只评估5个episode
             deterministic=True,
             render=False,
             verbose=1

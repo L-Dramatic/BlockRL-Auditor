@@ -1,0 +1,49 @@
+# Ethereum 协议配置
+# Ethereum 使用修改版 GHOST 协议，包含叔块奖励机制
+
+environment:
+  protocol: ethereum
+  alpha: 0.35
+  gamma: 0.5
+  max_hidden_block: 20
+  # Ethereum 实际孤块率约 6%
+  stale_rate: 0.06
+  know_alpha: true
+  random:
+    enabled: false
+    dev: 0.0
+    interval: [0.0, 0.5]
+    process: brown
+
+training:
+  algorithm: DQN
+  # Ethereum 环境可能需要更多训练
+  total_timesteps: 150000
+  learning_rate: 0.0001
+  buffer_size: 50000
+  learning_starts: 2000
+  batch_size: 64
+  gamma_discount: 0.99
+  target_update_interval: 1000
+  exploration:
+    initial_eps: 1.0
+    final_eps: 0.02
+    fraction: 0.15
+
+evaluation:
+  n_episodes: 100
+  max_steps: 10000
+  deterministic: true
+
+output:
+  model_path: ./models/ethereum
+  log_path: ./logs/ethereum
+  results_path: ./results/ethereum
+  tensorboard: false
+
+experiments:
+  alphas: [0.25, 0.30, 0.35, 0.40, 0.45]
+  protocols: [ethereum]
+  n_repeats: 3
+  seed_start: 42
+
